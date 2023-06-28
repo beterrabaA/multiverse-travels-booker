@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  postgres_db:
+    image: postgres:14.8-alpine
+    container_name: app_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '1234'
+    ports:
+      - 5444:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - api_network
+
+  backend:
+    container_name: app_backend
+    build: ./api
+    working_dir: /api
+    ports:
+      - 3000:3000
+    platform: linux/amd64
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    environment:
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=postgres_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=travel_plans
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]
+      timeout: 10s
+      retries: 5
+    networks:
+      - api_network
+
+networks:
+  api_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+volumes:
+  db-data:
