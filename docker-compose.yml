@@ -34,8 +34,8 @@ services:
       - POSTGRES_PORT=5432
       - POSTGRES_HOST=postgres_db
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=travel_plans
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=multiverse_travels
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3000"]
       timeout: 10s
