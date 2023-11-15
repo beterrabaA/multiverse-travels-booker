@@ -1,17 +1,12 @@
 CREATE DATABASE multiverse_travels;
 
--- \c multiverse_travels
+\c multiverse_travels;
+CREATE TABLE TRAVELS(
+   ID INT PRIMARY KEY     NOT NULL
+);
 
--- CREATE TABLE COMPANY(
---    ID INT PRIMARY KEY     NOT NULL,
---    NAME           TEXT    NOT NULL,
---    AGE            INT     NOT NULL,
---    ADDRESS        CHAR(50),
---    SALARY         REAL
--- );
-
--- CREATE TABLE DEPARTMENT(
---    ID INT PRIMARY KEY      NOT NULL,
---    DEPT           CHAR(50) NOT NULL,
---    EMP_ID         INT      NOT NULL
--- );
+CREATE TABLE DESTINATIONS(
+   ID INT PRIMARY KEY      NOT NULL,
+   LOCATION_ID           CHAR(50) NOT NULL,
+   TRAVEL_ID         INT      NOT NULL
+);
