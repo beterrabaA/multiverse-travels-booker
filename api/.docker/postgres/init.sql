@@ -1,0 +1,2 @@
+CREATE DATABASE travels;
+CREATE DATABASE destinations;
