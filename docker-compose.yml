@@ -1,24 +1,6 @@
 version: "3.9"
 
 services:
-  postgres_db:
-    image: postgres:14.8-alpine
-    container_name: app_db
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
-      interval: 3s
-      timeout: 5s
-      retries: 10
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: root
-    ports:
-      - 5444:5432
-    volumes:
-      - .docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - api_network
 
   backend:
     container_name: app_backend
@@ -40,6 +22,25 @@ services:
       test: ["CMD", "lsof", "-t", "-i:3000"]
       timeout: 10s
       retries: 5
+    networks:
+      - api_network
+      
+  postgres_db:
+    image: postgres:14.8-alpine
+    container_name: app_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - 5444:5432
+    volumes:
+      - .docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - api_network
 
