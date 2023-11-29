@@ -7,6 +7,7 @@ class TravelController
   dest_service = DestinationService.new
 
   get BASE_ENDPOINT do |env|
+    puts "ta mo frio"
     env.response.content_type = "application/json"
     expand = env.params.query["expand"]?
     optimize = env.params.query["optimize"]?
@@ -39,7 +40,7 @@ class TravelController
     else
       plan_created = Travel.create
 
-      dest_service.insert_destinations travels.to_s, plan_created.id.as(Int64)
+      dest_service.insert_destinations travels.to_s, plan_created.id.as(Int32)
     end
   end
 
@@ -72,7 +73,7 @@ class TravelController
 
       {"message": "array of travels_stops is empty"}.to_json
     else
-      reponse = dest_service.append_destinations travels.to_s, id.to_i64
+      reponse = dest_service.append_destinations travels.to_s, id.to_i32
       reponse.to_json
     end
   end

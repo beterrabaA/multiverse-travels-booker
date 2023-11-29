@@ -85,7 +85,7 @@ Para rodar esse projeto localmente, você vai precisar adicionar as seguintes va
 - Usando paramentros opcionais: Viagems otimizadas
 
 ```http
-GET /travel-plans?optimize=true&expand=false
+GET /travel_plans?optimize=true&expand=false
 ```
 ```json
 [
@@ -108,7 +108,7 @@ GET /travel-plans?optimize=true&expand=false
 - Usando paramentros opcionais: Viagems otimizadas e expandidas
 
 ```http
-GET /travel-plans?optimize=true&expand=true
+GET /travel_plans?optimize=true&expand=true
 ```
 ```json
 [
@@ -150,7 +150,7 @@ GET /travel-plans?optimize=true&expand=true
 ```
 - Usando paramentros opcionais: Viagems expandidas
 ```http
-GET /travel-plans?optimize=false&expand=true
+GET /travel_plans?optimize=false&expand=true
 ```
 ```json
 [
@@ -212,7 +212,7 @@ GET /travel-plans?optimize=false&expand=true
 - Usando paramentros opcionais: Viagems otimizadas
 
 ```http
-GET /travel-plans/1?optimize=true&expand=false
+GET /travel_plans/1?optimize=true&expand=false
 ```
 ```json
   {
@@ -226,7 +226,7 @@ GET /travel-plans/1?optimize=true&expand=false
 - Usando paramentros opcionais: Viagems otimizadas e expandidas
 
 ```http
-GET /travel-plans/1?optimize=true&expand=true
+GET /travel_plans/1?optimize=true&expand=true
 ```
 ```json
   {
@@ -249,7 +249,7 @@ GET /travel-plans/1?optimize=true&expand=true
 ```
 - Usando paramentros opcionais: Viagems expandidas
 ```http
-GET /travel-plans?optimize=false&expand=true
+GET /travel_plans?optimize=false&expand=true
 ```
 ```json
   {

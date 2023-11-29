@@ -19,7 +19,7 @@ class DestinationService
     travel_service.query_byId travel_id
   end
 
-  def insert_destinations(ids : String, travel_id : Int64)
+  def insert_destinations(ids : String, travel_id : Int32)
     objects = Array(Destination).new
     ids_i = Array(Int32).from_json(ids)
     ids_i.each do |id|
@@ -33,10 +33,9 @@ class DestinationService
     {id: travel_id, travel_stops: ids_i}.to_json
   end
 
-  def append_destinations(ids : String, travel_id : Int64)
+  def append_destinations(ids : String, travel_id : Int32)
     travel_service = TravelService.new
     insert_destinations ids, travel_id
-
     travel_service.query_byId travel_id
   end
 end

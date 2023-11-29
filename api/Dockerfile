@@ -1,4 +1,4 @@
-FROM crystallang/crystal
+FROM crystallang/crystal:1.8.2-alpine
 
 WORKDIR /api
 
@@ -8,10 +8,7 @@ RUN shards install
 
 COPY . /api/
 
-RUN crystal build -o bin/api src/api.cr
-
-ENTRYPOINT [ "bin/api" ]
-
 EXPOSE 3000
 
+CMD [ "crystal", "src/api.cr"	 ]
 

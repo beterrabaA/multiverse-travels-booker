@@ -1,5 +1,5 @@
 class TravelMapping
     JSON.mapping(
-        id: Int64
+        id: Int32
     )
 end
