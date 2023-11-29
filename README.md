@@ -14,11 +14,7 @@ Instalação de dependências
 ```
     
 ## Bancos de dados
-### Migração e setup
-Para o **funcionamento nos testes automatizados** é preciso rodar o script de migração
-```bash
-/bin/bash migrations.sh 
-```
+
 ### Schema do banco de dados
 ![Schema do banco de dados](./api/db/schema.png)
 
@@ -26,7 +22,6 @@ Para o **funcionamento nos testes automatizados** é preciso rodar o script de m
 Para rodar o projeto, execute o seguinte comando
 
 ```bash
-  /bin/bash migrations.sh 
   docker-compose up -d --build
 ```
 Abra o navegador e acesse o endereço [http://localhost:3000/travel_plans](http://localhost:3000/travel_plans)
