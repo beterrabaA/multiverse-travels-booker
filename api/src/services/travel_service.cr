@@ -6,7 +6,6 @@ class TravelService
   def query_all(optimized : Bool = false, expanded : Bool = false)
     plans = Travel.all
     array_plans = Array(TravelMapping).from_json "#{plans.to_json}"
-    puts "foi"
     array_plans.map { |z| query_byId z.id, expanded, optimized }.to_json
   end
 

@@ -7,7 +7,6 @@ class TravelController
   dest_service = DestinationService.new
 
   get BASE_ENDPOINT do |env|
-    puts "ta mo frio"
     env.response.content_type = "application/json"
     expand = env.params.query["expand"]?
     optimize = env.params.query["optimize"]?
