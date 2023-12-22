@@ -6,18 +6,20 @@ class TravelController
   trav_service = TravelService.new
   dest_service = DestinationService.new
 
-  get BASE_ENDPOINT do |env|
+  before_all BASE_ENDPOINT do |env|
     env.response.content_type = "application/json"
+  end
+
+  before_get BASE_ENDPOINT do |env|
     expand = env.params.query["expand"]?
     optimize = env.params.query["optimize"]?
+  end
 
+  get BASE_ENDPOINT do |env|
     trav_service.query_all optimize == "true", expand == "true"
   end
 
   get BASE_ENDPOINT + "/:id" do |env|
-    env.response.content_type = "application/json"
-    optimize = env.params.query["optimize"]?
-    expand = env.params.query["expand"]?
     id = env.params.url["id"]
 
     unless Travel.find(id).nil?
@@ -29,13 +31,10 @@ class TravelController
   end
 
   post BASE_ENDPOINT do |env|
-    env.response.content_type = "application/json"
-    env.response.status_code = 201
+    env.response.status_code = HTTP::Status::CREATED
     travels = env.params.json["travel_stops"].as(Array)
     if travels.empty?
-      env.response.status_code = 400
-
-      {"message": "array of travels_stops is empty"}.to_json
+      env.response.status_code = HTTP::Status::BAD_REQUEST
     else
       plan_created = Travel.create
 
@@ -44,7 +43,6 @@ class TravelController
   end
 
   put BASE_ENDPOINT + "/:id" do |env|
-    env.response.content_type = "application/json"
     travels = env.params.json["travel_stops"].as(Array)
     id = env.params.url["id"]
 
@@ -53,7 +51,7 @@ class TravelController
   end
 
   delete BASE_ENDPOINT + "/:id" do |env|
-    env.response.status_code = 204
+    env.response.status_code = HTTP::Status::NO_CONTENT
     id = env.params.url["id"]
 
     unless Travel.find(id).nil?
@@ -64,13 +62,10 @@ class TravelController
   end
 
   patch BASE_ENDPOINT + "/:id/append" do |env|
-    env.response.content_type = "application/json"
     travels = env.params.json["travel_stops"].as(Array)
     id = env.params.url["id"]
     if travels.empty?
-      env.response.status_code = 400
-
-      {"message": "array of travels_stops is empty"}.to_json
+      env.response.status_code = HTTP::Status::BAD_REQUEST
     else
       reponse = dest_service.append_destinations travels.to_s, id.to_i32
       reponse.to_json
